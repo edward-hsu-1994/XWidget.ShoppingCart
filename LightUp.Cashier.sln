@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightUp.Cashier", "LightUp.Cashier\LightUp.Cashier.csproj", "{F1147F06-ADE4-4FCD-B0A8-6B73A6AF1595}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightUp.Cashier.Test", "LightUp.Cashier.Test\LightUp.Cashier.Test.csproj", "{B0E07108-E164-46ED-89EE-88F02EC40FF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F1147F06-ADE4-4FCD-B0A8-6B73A6AF1595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1147F06-ADE4-4FCD-B0A8-6B73A6AF1595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1147F06-ADE4-4FCD-B0A8-6B73A6AF1595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0E07108-E164-46ED-89EE-88F02EC40FF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0E07108-E164-46ED-89EE-88F02EC40FF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0E07108-E164-46ED-89EE-88F02EC40FF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0E07108-E164-46ED-89EE-88F02EC40FF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
