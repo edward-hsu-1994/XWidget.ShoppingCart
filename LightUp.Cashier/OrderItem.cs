@@ -4,8 +4,11 @@ using System.Text;
 
 namespace LightUp.Cashier {
     public class OrderItem {
-        internal Dictionary<Type, uint> CouponUsed { get; set; }
-            = new Dictionary<Type, uint>();
+        /// <summary>
+        /// 優惠券使用數量(Key為優惠券Id)
+        /// </summary>
+        public Dictionary<object, uint> CouponUsed { get; set; }
+            = new Dictionary<object, uint>();
 
         /// <summary>
         /// 唯一識別號

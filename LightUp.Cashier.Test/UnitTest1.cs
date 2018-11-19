@@ -11,12 +11,14 @@ namespace LightUp.Cashier.Test {
             var cashier = new DefaultCashier();
             // 第二件6折
             cashier.CouponList.Add(new SecondPieceDiscount() {
+                Id = 0,
                 OffPercent = 40,
                 DiscountItems = new List<object>() { 1 }
             });
 
             // 滿1000元9折
             cashier.CouponList.Add(new Discount() {
+                Id = 1,
                 OffPercent = 10,
                 Threshold = 1000
             });
@@ -49,6 +51,7 @@ namespace LightUp.Cashier.Test {
             var cashier = new DefaultCashier();
             // 第二件6折
             cashier.CouponList.Add(new SecondPieceDiscount() {
+                Id = 0,
                 OffPercent = 40,
                 DiscountItems = new List<object>() { 1 },
                 Count = 1
@@ -56,6 +59,7 @@ namespace LightUp.Cashier.Test {
 
             // 滿1000元9折
             cashier.CouponList.Add(new Discount() {
+                Id = 1,
                 OffPercent = 10,
                 Threshold = 1000
             });

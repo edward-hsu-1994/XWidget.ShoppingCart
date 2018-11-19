@@ -19,9 +19,8 @@ namespace LightUp.Cashier.Coupon {
 
             //檢驗是否已經重複使用
             if (!AllowReuse &&
-                order.Items.Any(x =>
-                    x is CouponOrderItem coupon &&
-                    coupon.CouponType == typeof(Discount))) {
+                order.CouponUsed.ContainsKey(Id) &&
+                order.CouponUsed[Id] > 0) {
                 return false;
             }
 
@@ -39,6 +38,12 @@ namespace LightUp.Cashier.Coupon {
                 Name = $"滿{Threshold}元{new string((100 - OffPercent).ToString().TakeWhile(x => x != '0').ToArray())}折",
                 UnitPrice = order.Amount * (OffPercent / 100m) * -1m
             });
+            if (order.CouponUsed.ContainsKey(Id)) {
+                order.CouponUsed[Id]++;
+            } else {
+                order.CouponUsed[Id] = 1;
+            }
+
             if (Count.HasValue) {
                 Count--;
             }
