@@ -6,8 +6,10 @@ namespace LightUp.Cashier {
     /// <summary>
     /// 優惠券
     /// </summary>
-    public interface ICoupon<TId> {
-        bool Vaild(Order<TId> order);
-        void Use(Order<TId> order);
+    public interface ICoupon {
+        object Id { get; set; }
+        uint? Count { get; set; }
+        bool Vaild(Order order);
+        void Use(Order order);
     }
 }

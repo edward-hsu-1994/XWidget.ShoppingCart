@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LightUp.Cashier {
-    public class OrderItem<TId> {
+    public class OrderItem {
         internal Dictionary<Type, uint> CouponUsed { get; set; }
             = new Dictionary<Type, uint>();
 
         /// <summary>
         /// 唯一識別號
         /// </summary>
-        public TId Id { get; set; }
+        public object Id { get; set; }
 
         /// <summary>
         /// 名稱

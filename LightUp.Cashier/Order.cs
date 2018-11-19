@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 
 namespace LightUp.Cashier {
-    public class Order<TId> {
-        internal List<OrderItem<TId>> _items;
-        public IReadOnlyList<OrderItem<TId>> Items => this._items.AsReadOnly();
+    public class Order {
+        internal List<OrderItem> _items;
+        public IReadOnlyList<OrderItem> Items => this._items.AsReadOnly();
 
         public decimal Amount {
             get {
@@ -14,7 +14,7 @@ namespace LightUp.Cashier {
             }
         }
 
-        public Order(IEnumerable<OrderItem<TId>> items) {
+        public Order(IEnumerable<OrderItem> items) {
             this._items = items.ToList();
         }
     }
