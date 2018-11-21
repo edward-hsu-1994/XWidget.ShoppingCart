@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LightUp.ShoppingCart {
+namespace LightUp.ShoppingCart.Coupons {
     /// <summary>
     /// 訂單項目優惠券基礎類別
     /// </summary>
