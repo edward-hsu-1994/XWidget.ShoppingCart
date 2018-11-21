@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LightUp.ShoppingCart {
     public interface IOrder {
-        IReadOnlyList<IOrderItem> Items { get; }
+        IList<IOrderItem> Items { get; }
 
         decimal TotalAmount { get; }
     }

@@ -8,6 +8,11 @@ namespace LightUp.ShoppingCart {
     /// </summary>
     public interface ICoupon {
         /// <summary>
+        /// 名稱
+        /// </summary>
+        string Name { get; set; }
+
+        /// <summary>
         /// 可用數量
         /// </summary>
         uint? Count { get; set; }
