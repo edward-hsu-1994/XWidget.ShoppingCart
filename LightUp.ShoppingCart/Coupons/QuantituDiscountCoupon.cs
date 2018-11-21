@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LightUp.ShoppingCart.Coupons {
     /// <summary>
-    /// 數量折扣
+    /// 單品數量折扣
     /// </summary>
     /// <typeparam name="TCouponIdentifier">優惠券唯一識別號</typeparam>
     /// <typeparam name="TOrderItemIdentifier">訂單項目識別號類型</typeparam>
     public class QuantituDiscountCoupon<TCouponIdentifier, TOrderItemIdentifier>
         : OrderItemCouponBase<TCouponIdentifier, TOrderItemIdentifier> {
+
         /// <summary>
         /// 折價金額
         /// </summary>
@@ -57,7 +59,32 @@ namespace LightUp.ShoppingCart.Coupons {
         /// </summary>
         /// <param name="order"></param>
         public override void Use(IOrder order) {
-            throw new NotImplementedException();
+
+            foreach (var orderItem in order.Items) {
+                if (IsAvailable(orderItem) &&
+                    orderItem is IOrderItem<TOrderItemIdentifier> item) {
+
+                    var totalOccupy = Cashier.GetTotalOccupyOrderItemCount(order);
+
+                    var thisItemUsedCouponCount
+                        = totalOccupy.ContainsKey(item) ?
+                        totalOccupy[item].Sum(x => x.Value) :
+                        0;
+
+                    var count = (uint)Math.Floor(((double)item.Count - thisItemUsedCouponCount) / DiscountQuantity);
+
+                    var couponItem = new CouponOrderItem() {
+                        Coupon = this,
+                        Name = Name,
+                        Price = -DiscountPrice,
+                        Count = count
+                    };
+
+                    couponItem.OccupyOrderItemCount[item] = count;
+                    Count -= couponItem.Count;
+                    order.Items.Add(couponItem);
+                }
+            }
         }
     }
 }
