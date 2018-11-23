@@ -62,6 +62,10 @@ namespace LightUp.ShoppingCart.Coupons {
                 return orderItem.Count - occupyOrderItemTotal >= DiscountQuantity;
             }
 
+            if(DiscountQuantity == 0) {
+                throw new ArgumentException($"{nameof(DiscountQuantity)}不該為0");
+            }
+
             return orderItem.Count >= DiscountQuantity;
         }
 
@@ -70,7 +74,7 @@ namespace LightUp.ShoppingCart.Coupons {
         /// </summary>
         /// <param name="order"></param>
         public override void Use(IOrder order) {
-            foreach (var orderItem in order.Items) {
+            foreach (var orderItem in order.Items.ToArray()) {
                 if (IsAvailable(order,orderItem) &&
                     orderItem is IOrderItem<TOrderItemIdentifier> item) {
 
@@ -83,6 +87,10 @@ namespace LightUp.ShoppingCart.Coupons {
 
                     var count = (uint)Math.Floor(((double)item.Count - thisItemUsedCouponCount) / DiscountQuantity);
 
+                    if(Count.HasValue) {
+                        count = Math.Min(Count.Value, count);
+                    }
+
                     var couponItem = new CouponOrderItem() {
                         Coupon = this,
                         Name = Name,
@@ -90,8 +98,12 @@ namespace LightUp.ShoppingCart.Coupons {
                         Count = count
                     };
 
-                    couponItem.OccupyOrderItemCount[item] = count;
-                    Count -= couponItem.Count;
+                    couponItem.OccupyOrderItemCount[item] = count * DiscountQuantity;
+
+                    if (Count.HasValue) {
+                        Count -= couponItem.Count;
+                    }
+
                     order.Items.Add(couponItem);
                 }
             }
