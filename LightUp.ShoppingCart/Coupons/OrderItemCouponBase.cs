@@ -50,15 +50,16 @@ namespace LightUp.ShoppingCart.Coupons {
                 return false;
             }
 
-            return order.Items.Any(x => IsAvailable(x));
+            return order.Items.Any(x => IsAvailable(order, x));
         }
 
         /// <summary>
         /// 檢驗優惠券是否適用於指定訂單項目
         /// </summary>
-        /// <param name="order">訂單項目</param>
+        /// <param name="orderItem">訂單項目</param>
+        /// <param name="order">訂單</param>
         /// <returns>是否適用</returns>
-        public virtual bool IsAvailable(IOrderItem orderItem) {
+        public virtual bool IsAvailable(IOrder order,IOrderItem orderItem) {
             if (orderItem is IOrderItem<TOrderItemIdentifier> item) {
                 return Targets.Contains(item.Id);
             }

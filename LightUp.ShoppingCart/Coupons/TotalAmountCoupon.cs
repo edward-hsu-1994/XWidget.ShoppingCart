@@ -97,24 +97,37 @@ namespace LightUp.ShoppingCart.Coupons {
 
             var amount = order.TotalAmount;
 
-            var discount = (100 - DiscountPercent) / 100;
+            if (AllowReuse) {
+                var discount = (100-DiscountPercent) / 100m;
 
-            // amount * discount ^ count = Threshold
-            // discount ^ count = Threshold / amount;
-            // log_(Threshold / amount) discount = count
+                // amount * discount ^ count = Threshold
+                // discount ^ count = Threshold / amount;
+                // log_(Threshold / amount) discount = count
 
-            var count = Convert.ToUInt32(Math.Ceiling(
-                Math.Log(decimal.ToDouble(Threshold / amount), decimal.ToDouble(discount))
-            ));
+                var count = Convert.ToUInt32(Math.Ceiling(
+                    Math.Log(decimal.ToDouble(Threshold / amount), decimal.ToDouble(discount))
+                ));
 
-            count = Convert.ToUInt32(Math.Min(count, Count.Value));
+                count = Convert.ToUInt32(Math.Min(count, Count.Value));
 
-            couponItem.Price = amount - new decimal(Math.Pow(discount, count)) * amount;
+                couponItem.Price = amount - new decimal(Math.Pow(decimal.ToDouble(discount), count)) * amount;
+                couponItem.Price *= -1;
 
-            #region 使用並扣除數量
-            Count -= count;
-            order.Items.Add(couponItem);
-            #endregion
+                #region 使用並扣除數量
+                Count -= count;
+                order.Items.Add(couponItem);
+                UsedOrder.Add(order);
+                #endregion
+            } else {
+                couponItem.Price = amount * DiscountPercent / 100m;
+                couponItem.Price *= -1;
+
+                #region 使用並扣除數量
+                Count -= 1;
+                order.Items.Add(couponItem);
+                UsedOrder.Add(order);
+                #endregion
+            }
         }
     }
 }

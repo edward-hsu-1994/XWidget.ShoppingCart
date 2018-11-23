@@ -31,9 +31,9 @@ namespace LightUp.ShoppingCart.Coupons {
             if (!base.IsAvailable(order)) {
                 return false;
             }
-
+                        
             foreach (var item in order.Items) {
-                if (IsAvailable(item)) {
+                if (IsAvailable(order,item)) {
                     return true;
                 }
             }
@@ -44,11 +44,22 @@ namespace LightUp.ShoppingCart.Coupons {
         /// <summary>
         /// 檢驗優惠券是否適用於指定訂單項目
         /// </summary>
-        /// <param name="order">訂單項目</param>
+        /// <param name="order">訂單</param>
+        /// <param name="orderItem">訂單項目</param>
         /// <returns>是否適用</returns>
-        public override bool IsAvailable(IOrderItem orderItem) {
-            if (!base.IsAvailable(orderItem)) {
+        public override bool IsAvailable(IOrder order, IOrderItem orderItem) {
+            if (!base.IsAvailable(order, orderItem)) {
                 return false;
+            }
+
+            var occupyOrderItem = Cashier.GetTotalOccupyOrderItemCount(order);
+
+            if (occupyOrderItem.ContainsKey(orderItem)) {
+                // 占用數量
+                var occupyOrderItemTotal = occupyOrderItem[orderItem].Sum(x => x.Value);
+
+                // 剩餘未占用項目是否還夠用
+                return orderItem.Count - occupyOrderItemTotal >= DiscountQuantity;
             }
 
             return orderItem.Count >= DiscountQuantity;
@@ -59,9 +70,8 @@ namespace LightUp.ShoppingCart.Coupons {
         /// </summary>
         /// <param name="order"></param>
         public override void Use(IOrder order) {
-
             foreach (var orderItem in order.Items) {
-                if (IsAvailable(orderItem) &&
+                if (IsAvailable(order,orderItem) &&
                     orderItem is IOrderItem<TOrderItemIdentifier> item) {
 
                     var totalOccupy = Cashier.GetTotalOccupyOrderItemCount(order);
