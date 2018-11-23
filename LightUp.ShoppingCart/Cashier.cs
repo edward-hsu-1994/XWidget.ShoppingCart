@@ -36,6 +36,9 @@ namespace LightUp.ShoppingCart {
                         item.OccupyOrderItemCount?.TryGetValue(occupy.Key, out occupyCount);
 
                         // 加總
+                        if (!details.ContainsKey(item.Coupon)) {
+                            details[item.Coupon] = 0;
+                        }
                         details[item.Coupon] += occupyCount;
                     }
                 }
