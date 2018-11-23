@@ -19,6 +19,8 @@ namespace LightUp.ShoppingCart {
         /// <summary>
         /// 取得優惠券占用項目列表
         /// </summary>
+        /// <param name="order">訂單</param>
+        /// <returns>訂單項目占用列表</returns>
         public static Dictionary<IOrderItem, Dictionary<ICoupon, uint>> GetTotalOccupyOrderItemCount(IOrder order) {
             var result = new Dictionary<IOrderItem, Dictionary<ICoupon, uint>>();
 
@@ -45,6 +47,19 @@ namespace LightUp.ShoppingCart {
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 取得訂單中使用的折價券列表
+        /// </summary>
+        /// <param name="order">訂單</param>
+        /// <returns>折價券列表</returns>
+        public static IEnumerable<ICoupon> GetUsedCompon(IOrder order) {
+            return order.Items
+                .Select(x => 
+                    x is CouponOrderItem item ? item.Coupon : null
+                )
+                .Where(x => x != null);
         }
     }
 }

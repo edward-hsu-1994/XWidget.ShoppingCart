@@ -43,7 +43,6 @@ namespace LightUp.ShoppingCart.Test {
             Assert.Equal(answer, order.TotalAmount);
         }
 
-
         [Fact(DisplayName = "第二件半價，無限次數")]
         public void SecondHalfPrice_Unlimit() {
             var TargetProductId = Guid.NewGuid();
