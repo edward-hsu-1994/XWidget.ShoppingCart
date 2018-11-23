@@ -108,13 +108,18 @@ namespace LightUp.ShoppingCart.Coupons {
                     Math.Log(decimal.ToDouble(Threshold / amount), decimal.ToDouble(discount))
                 ));
 
-                count = Convert.ToUInt32(Math.Min(count, Count.Value));
+                if (Count.HasValue) {
+                    count = Convert.ToUInt32(Math.Min(count, Count.Value));
+                }
 
                 couponItem.Price = amount - new decimal(Math.Pow(decimal.ToDouble(discount), count)) * amount;
                 couponItem.Price *= -1;
 
                 #region 使用並扣除數量
-                Count -= count;
+                if (Count.HasValue) {
+                    Count -= count;
+                }
+
                 order.Items.Add(couponItem);
                 UsedOrder.Add(order);
                 #endregion
