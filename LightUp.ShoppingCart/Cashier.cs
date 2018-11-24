@@ -4,6 +4,38 @@ using System.Linq;
 
 namespace LightUp.ShoppingCart {
     public static class Cashier {
+        /// <summary>
+        /// 合併重覆品項
+        /// </summary>
+        /// <param name="order">訂單</param>
+        public static void MergeOrderItem<TOrderItemIdentifier>(IOrder order) {
+            var hasIdItems = order.Items.Where(x => x is IOrderItem<TOrderItemIdentifier>)
+                .Cast<IOrderItem<TOrderItemIdentifier>>()
+                .GroupBy(x=>x.Id)
+                .ToList();
+            
+            foreach(var idItems in hasIdItems) {
+                if(idItems.Count() > 1) {
+                    var keepItem = idItems.First();
+
+                    foreach(var removeItem in idItems) {
+                        if (removeItem == keepItem) continue;
+                        order.Items.Remove(removeItem);
+                    }
+                    
+                    keepItem.Count = Convert.ToUInt32(
+                        idItems.Sum(x => x.Count)
+                    );
+                }
+            }
+        }
+
+        public static void Checkout<TOrderItemIdentifier>(IOrder order, IEnumerable<ICoupon> coupons) {
+            MergeOrderItem<TOrderItemIdentifier>(order);
+
+            Checkout(order,coupons);
+        }
+
         public static void Checkout(IOrder order, IEnumerable<ICoupon> coupons) {
             IEnumerable<ICoupon> allowCoupons = null;
 
