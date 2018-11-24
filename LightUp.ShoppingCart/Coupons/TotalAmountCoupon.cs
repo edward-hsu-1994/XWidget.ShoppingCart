@@ -82,7 +82,7 @@ namespace LightUp.ShoppingCart.Coupons {
         /// <summary>
         /// 使用優惠券
         /// </summary>
-        /// <param name="order"></param>
+        /// <param name="order">訂單</param>
         public virtual void Use(IOrder order) {
             if (!IsAvailable(order)) {
                 return;

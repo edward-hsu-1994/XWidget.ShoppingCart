@@ -55,12 +55,20 @@ namespace LightUp.ShoppingCart.Test {
                 }
             };
 
+            var productId = Guid.NewGuid();
+
             IOrder order = new TestOrder() {
                 Items = new List<IOrderItem>(
                         new TestOrderItem[] {
                             new TestOrderItem() {
-                                Id = Guid.NewGuid(),
-                                Count = 15,
+                                Id = productId,
+                                Count = 10,
+                                Price = 100,
+                                Name = "衛生紙(12包裝)"
+                            },
+                            new TestOrderItem() {
+                                Id = productId,
+                                Count = 5,
                                 Price = 100,
                                 Name = "衛生紙(12包裝)"
                             }

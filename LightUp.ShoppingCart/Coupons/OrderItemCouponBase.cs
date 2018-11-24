@@ -59,7 +59,7 @@ namespace LightUp.ShoppingCart.Coupons {
         /// <param name="orderItem">訂單項目</param>
         /// <param name="order">訂單</param>
         /// <returns>是否適用</returns>
-        public virtual bool IsAvailable(IOrder order,IOrderItem orderItem) {
+        private protected virtual bool IsAvailable(IOrder order,IOrderItem orderItem) {
             if (orderItem is IOrderItem<TOrderItemIdentifier> item) {
                 return Targets.Contains(item.Id);
             }

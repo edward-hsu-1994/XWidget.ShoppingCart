@@ -62,8 +62,14 @@ namespace LightUp.ShoppingCart.Test {
                 Items = new List<IOrderItem>(
                         new TestOrderItem[] {
                             new TestOrderItem() {
-                                Id =TargetProductId,
-                                Count = 15,
+                                Id = TargetProductId,
+                                Count = 5,
+                                Price = 100,
+                                Name = "衛生紙(12包裝)"
+                            },
+                             new TestOrderItem() {
+                                Id = TargetProductId,
+                                Count = 10,
                                 Price = 100,
                                 Name = "衛生紙(12包裝)"
                             }

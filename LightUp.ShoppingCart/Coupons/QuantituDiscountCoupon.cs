@@ -28,6 +28,9 @@ namespace LightUp.ShoppingCart.Coupons {
         /// <param name="order">訂單</param>
         /// <returns>是否可使用</returns>
         public override bool IsAvailable(IOrder order) {
+            // 合併項目
+            Cashier.MergeOrderItem<TOrderItemIdentifier>(order);
+
             if (!base.IsAvailable(order)) {
                 return false;
             }
@@ -47,7 +50,7 @@ namespace LightUp.ShoppingCart.Coupons {
         /// <param name="order">訂單</param>
         /// <param name="orderItem">訂單項目</param>
         /// <returns>是否適用</returns>
-        public override bool IsAvailable(IOrder order, IOrderItem orderItem) {
+        private protected override bool IsAvailable(IOrder order, IOrderItem orderItem) {
             if (!base.IsAvailable(order, orderItem)) {
                 return false;
             }
@@ -72,8 +75,11 @@ namespace LightUp.ShoppingCart.Coupons {
         /// <summary>
         /// 使用優惠券
         /// </summary>
-        /// <param name="order"></param>
+        /// <param name="order">訂單</param>
         public override void Use(IOrder order) {
+            // 合併項目
+            Cashier.MergeOrderItem<TOrderItemIdentifier>(order);
+
             foreach (var orderItem in order.Items.ToArray()) {
                 if (IsAvailable(order,orderItem) &&
                     orderItem is IOrderItem<TOrderItemIdentifier> item) {
