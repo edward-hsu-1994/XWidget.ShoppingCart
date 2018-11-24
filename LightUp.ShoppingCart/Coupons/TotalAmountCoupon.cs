@@ -38,15 +38,6 @@ namespace LightUp.ShoppingCart.Coupons {
         public virtual uint? Count { get; set; }
 
         /// <summary>
-        /// 是否為數量不受限制的
-        /// </summary>
-        public bool IsUnlimited {
-            get {
-                return !Count.HasValue;
-            }
-        }
-
-        /// <summary>
         /// 檢驗指定訂單是否已經用過這個優惠券
         /// </summary>
         /// <param name="order">訂單</param>
@@ -62,7 +53,7 @@ namespace LightUp.ShoppingCart.Coupons {
         /// <returns>是否可使用</returns>
         public virtual bool IsAvailable(IOrder order) {
             // 沒有優惠券
-            if (!IsUnlimited && Count == 0) {
+            if (Count.HasValue && Count == 0) {
                 return false;
             }
 

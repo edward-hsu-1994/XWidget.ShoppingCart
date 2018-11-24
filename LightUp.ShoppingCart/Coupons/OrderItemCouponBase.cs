@@ -64,6 +64,10 @@ namespace LightUp.ShoppingCart.Coupons {
                 return Targets.Contains(item.Id);
             }
 
+            if(Count.HasValue && Count == 0) {
+                return false;
+            }
+
             return false;
         }
 
