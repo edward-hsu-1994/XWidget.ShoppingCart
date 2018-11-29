@@ -7,7 +7,7 @@ using Xunit;
 
 namespace LightUp.ShoppingCart.Test {
     public class SetCouponTest {
-        [Fact(DisplayName = "套餐優惠券，有限次數")]
+        [Fact(DisplayName = "尿布+啤酒省10元，有限次數")]
         public void SetCouponTest_Limit() {
             var productIdA = Guid.NewGuid();
             var productIdB = Guid.NewGuid();
@@ -58,7 +58,7 @@ namespace LightUp.ShoppingCart.Test {
             Assert.Equal(answer, order.TotalAmount);
         }
 
-        [Fact(DisplayName = "套餐優惠券，無限次數")]
+        [Fact(DisplayName = "尿布+啤酒省10元，無限次數")]
         public void SetCouponTest_Unlimit() {
             var productIdA = Guid.NewGuid();
             var productIdB = Guid.NewGuid();
@@ -108,7 +108,7 @@ namespace LightUp.ShoppingCart.Test {
             Assert.Equal(answer, order.TotalAmount);
         }
 
-        [Fact(DisplayName = "套餐優惠券，不同數量，有限次數")]
+        [Fact(DisplayName = "尿布+兩罐啤酒省10元，不同數量，有限次數")]
         public void SetCouponTest_limit2() {
             var productIdA = Guid.NewGuid();
             var productIdB = Guid.NewGuid();
@@ -159,7 +159,7 @@ namespace LightUp.ShoppingCart.Test {
             Assert.Equal(answer, order.TotalAmount);
         }
 
-        [Fact(DisplayName = "套餐優惠券，不同數量，無限次數")]
+        [Fact(DisplayName = "尿布+兩罐啤酒省10元，不同數量，無限次數")]
         public void SetCouponTest_Unlimit2() {
             var productIdA = Guid.NewGuid();
             var productIdB = Guid.NewGuid();
