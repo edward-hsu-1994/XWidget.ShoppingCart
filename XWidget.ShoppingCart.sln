@@ -5,7 +5,13 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XWidget.ShoppingCart", "XWidget.ShoppingCart\XWidget.ShoppingCart.csproj", "{65C8E610-0E4F-4DB6-A274-D7CFD923303B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XWidget.ShoppingCart.Test", "XWidget.ShoppingCart.Test\XWidget.ShoppingCart.Test.csproj", "{AB67FF23-7AF3-4C36-BB95-3DFAD579C088}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XWidget.ShoppingCart.Test", "XWidget.ShoppingCart.Test\XWidget.ShoppingCart.Test.csproj", "{AB67FF23-7AF3-4C36-BB95-3DFAD579C088}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B07F8D9F-3C1D-4798-A626-6F201237C77F}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F1147F06-ADE4-4FCD-B0A8-6B73A6AF1595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1147F06-ADE4-4FCD-B0A8-6B73A6AF1595}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1147F06-ADE4-4FCD-B0A8-6B73A6AF1595}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1147F06-ADE4-4FCD-B0A8-6B73A6AF1595}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0E07108-E164-46ED-89EE-88F02EC40FF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0E07108-E164-46ED-89EE-88F02EC40FF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0E07108-E164-46ED-89EE-88F02EC40FF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0E07108-E164-46ED-89EE-88F02EC40FF6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{65C8E610-0E4F-4DB6-A274-D7CFD923303B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{65C8E610-0E4F-4DB6-A274-D7CFD923303B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C8E610-0E4F-4DB6-A274-D7CFD923303B}.Release|Any CPU.ActiveCfg = Release|Any CPU
