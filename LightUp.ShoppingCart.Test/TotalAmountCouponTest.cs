@@ -7,7 +7,6 @@ using System.Linq;
 using Xunit;
 
 namespace LightUp.ShoppingCart.Test {
-    
     public class TotalAmountCouponTest {
         [Fact(DisplayName = "滿1000元九折，不可重覆使用")]
         public void Over1000Off10_DenyReuse() {

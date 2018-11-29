@@ -7,7 +7,7 @@ using Xunit;
 
 namespace LightUp.ShoppingCart.Test {
     public class QuantituDiscountCouponTest {
-        [Fact(DisplayName ="第二件半價，有限次數")]
+        [Fact(DisplayName = "第二件半價，有限次數")]
         public void SecondHalfPrice_Limit() {
             var TargetProductId = Guid.NewGuid();
 

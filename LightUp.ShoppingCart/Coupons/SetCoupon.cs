@@ -63,7 +63,7 @@ namespace LightUp.ShoppingCart.Coupons {
                         x is IOrderItem<TOrderItemIdentifier> item &&
                         item.Id.Equals(setItem.Key))
                     .Select(x => new {
-                        Occupy = occupy[x].Sum(y => y.Value),
+                        Occupy = occupy.ContainsKey(x) ? occupy[x].Sum(y => y.Value) : 0,
                         Item = x
                     })
                     .SingleOrDefault();
@@ -94,7 +94,7 @@ namespace LightUp.ShoppingCart.Coupons {
             while (IsAvailable(order)) {
                 // 適用於此優惠券項目
                 var setItems = order.Items
-                    .Where(x => 
+                    .Where(x =>
                         x is IOrderItem<TOrderItemIdentifier> item &&
                         Set.Keys.Contains(item.Id)
                     )
@@ -104,12 +104,12 @@ namespace LightUp.ShoppingCart.Coupons {
                 var occupy = Cashier.GetTotalOccupyOrderItemCount(order);
 
                 // 取得目前已經使用的項目
-                CouponOrderItem couponOrderItem 
+                CouponOrderItem couponOrderItem
                     = order.Items.SingleOrDefault(x => x is CouponOrderItem item && item.Coupon == this)
                         as CouponOrderItem;
 
                 // 如果沒有則加入
-                if(couponOrderItem == null) {
+                if (couponOrderItem == null) {
                     couponOrderItem = new CouponOrderItem() {
                         Coupon = this,
                         Name = Name,
